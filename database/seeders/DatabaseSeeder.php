@@ -2,12 +2,16 @@
 
 namespace Database\Seeders;
 
+use App\Models\Artist;
+use App\Models\Disk;
 use App\Models\User;
 use Carbon\Factory;
+use Faker\Core\Number;
 use Faker\Factory as FakerFactory;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Testing\Fakes\Fake;
 
 class DatabaseSeeder extends Seeder
 {
@@ -23,6 +27,24 @@ class DatabaseSeeder extends Seeder
                 'lastname' => FakerFactory::create()->lastName,
                 'email' => FakerFactory::create()->email,
                 'password' => Hash::make('password'),
+            ];
+        });
+
+        Artist::factory(25)->create(function() {
+            return [
+                'name' => FakerFactory::create()->name,
+                'type' => FakerFactory::create()->numberBetween(0,1),
+                'year' => FakerFactory::create()->year(),
+            ];
+        });
+
+        Disk::factory(10)->create(function() {
+            return [
+                'artist_id' => FakerFactory::create()->numberBetween(1, 25),
+                'name' => FakerFactory::create()->name,
+                'icono' => FakerFactory::create()->iconv,
+                'price' => FakerFactory::create()->numberBetween(50, 100),
+                'stock' => FakerFactory::create()->numberBetween(10, 100),
             ];
         });
     }
