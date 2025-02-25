@@ -14,8 +14,7 @@ class Store extends Model
         'name', 
     ];
 
-    public function adresseable()
-    {
-        return $this->morphTo();
+    public function addressable() {
+        return $this->morphMany(Address::class, 'addressable');
     }
 }

@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        
         User::factory(10)->create(function() {
             return [
                 'name' => FakerFactory::create()->name,
@@ -27,7 +27,16 @@ class DatabaseSeeder extends Seeder
                 'email' => FakerFactory::create()->email,
                 'password' => Hash::make('password'),
             ];
+        })->each(function($user) {
+            $user->addressable()->create([
+                'state' => 'Zacatecas',
+                'city' => 'fresnillo',
+                'country' => 'México',
+                'postal_code' => FakerFactory::create()->postcode,
+            ]);
         });
+
+
 
         Artist::factory(25)->create(function() {
             return [
@@ -47,10 +56,15 @@ class DatabaseSeeder extends Seeder
             ];
         });
 
-        Store::factory(10)->create(function() {
-            return [
-                'name' => FakerFactory::create()->name,
-            ];
+        
+
+        Store::factory(25)->create()->each(function($store) {
+            $store->addressable()->create([
+                'state' => 'Zacatecas',
+                'city' => 'fresnillo',
+                'country' => 'México',
+                'postal_code' => FakerFactory::create()->postcode,
+            ]);
         });
     }
 }
