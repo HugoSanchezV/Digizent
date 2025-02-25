@@ -5,15 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Artist extends Model
+class Store extends Model
 {
     //
     use HasFactory;
-    
-    protected $fillable = ['name', 'type', 'year'];
 
-    public function disks()
+    protected $fillable = [
+        'name', 
+    ];
+
+    public function adresseable()
     {
-        return $this->hasMany(Disk::class);
+        return $this->morphTo();
     }
 }
