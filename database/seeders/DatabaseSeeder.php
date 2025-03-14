@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Artist;
 use App\Models\Disk;
+use App\Models\DiskStore;
 use App\Models\Store;
 use App\Models\User;
 use Faker\Factory as FakerFactory;
@@ -19,52 +20,44 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        
-        User::factory(10)->create(function() {
-            return [
-                'name' => FakerFactory::create()->name,
-                'lastname' => FakerFactory::create()->lastName,
-                'email' => FakerFactory::create()->email,
-                'password' => Hash::make('password'),
-            ];
-        })->each(function($user) {
-            $user->addressable()->create([
-                'state' => 'Zacatecas',
-                'city' => 'fresnillo',
-                'country' => 'México',
-                'postal_code' => FakerFactory::create()->postcode,
-            ]);
-        });
+
+        // User::factory(10)->create()->each(function ($user) {
+        //     $user->addresses()->create([
+        //         'state' => 'Zacatecas',
+        //         'city' => 'Fresnillo',
+        //         'country' => 'México',
+        //         'postal_code' => FakerFactory::create()->postcode,
+        //     ]);
+        // });
 
 
+        // Artist::factory(25)->create(function () {
+        //     return [
+        //         'name' => FakerFactory::create()->name,
+        //         'type' => FakerFactory::create()->numberBetween(0, 1),
+        //         'year' => FakerFactory::create()->year(),
+        //     ];
+        // });
 
-        Artist::factory(25)->create(function() {
-            return [
-                'name' => FakerFactory::create()->name,
-                'type' => FakerFactory::create()->numberBetween(0,1),
-                'year' => FakerFactory::create()->year(),
-            ];
-        });
+        // Disk::factory(10)->create(function () {
+        //     return [
+        //         'artist_id' => FakerFactory::create()->numberBetween(1, 25),
+        //         'name' => FakerFactory::create()->name,
+        //         'icon' => 'icon',
+        //         'price' => FakerFactory::create()->numberBetween(50, 100),
+        //         //'stock' => FakerFactory::create()->numberBetween(10, 100),
+        //     ];
+        // });
 
-        Disk::factory(10)->create(function() {
-            return [
-                'artist_id' => FakerFactory::create()->numberBetween(1, 25),
-                'name' => FakerFactory::create()->name,
-                'icon' => 'icon',
-                'price' => FakerFactory::create()->numberBetween(50, 100),
-                'stock' => FakerFactory::create()->numberBetween(10, 100),
-            ];
-        });
+        // Store::factory(25)->create()->each(function ($store) {
+        //     $store->addresses()->create([
+        //         'state' => 'Zacatecas',
+        //         'city' => 'Fresnillo',
+        //         'country' => 'México',
+        //         'postal_code' => FakerFactory::create()->postcode,
+        //     ]);
+        // });  
 
-        
-
-        Store::factory(25)->create()->each(function($store) {
-            $store->addressable()->create([
-                'state' => 'Zacatecas',
-                'city' => 'fresnillo',
-                'country' => 'México',
-                'postal_code' => FakerFactory::create()->postcode,
-            ]);
-        });
+        DiskStore::factory(10)->create();
     }
 }

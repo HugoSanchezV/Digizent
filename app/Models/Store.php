@@ -11,10 +11,16 @@ class Store extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name', 
+        'name',
     ];
 
-    public function addressable() {
+    public function addresses()
+    {
         return $this->morphMany(Address::class, 'addressable');
+    }
+
+    public function disks()
+    {
+        return $this->belongsToMany(Disk::class, 'disk_store')->withPivot('stock') ;
     }
 }

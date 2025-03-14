@@ -8,11 +8,12 @@ class Address extends Model
 {
     //
     protected $fillable = [
-        'model_id',
-        'addressable',
+        'city',
         'state',
         'country',
         'postal_code',
+        'addressable_id',
+        'addressable_type',
     ];
 
     public function addressable() {
